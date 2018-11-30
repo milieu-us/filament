@@ -358,6 +358,7 @@ if (NOT ANDROID AND NOT WEBGL AND NOT IOS)
     add_subdirectory(${EXTERNAL}/skylight/tnt)
     add_subdirectory(${EXTERNAL}/stb/tnt)
     add_subdirectory(${EXTERNAL}/tinyexr/tnt)
+    add_subdirectory(${EXTERNAL}/meshoptimizer)
 
     add_subdirectory(${TOOLS}/cmgen)
     add_subdirectory(${TOOLS}/filamesh)
