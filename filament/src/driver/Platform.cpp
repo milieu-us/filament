@@ -31,6 +31,7 @@
         #include "driver/vulkan/PlatformVkCocoaTouch.h"
     #endif
 #elif defined(__APPLE__)
+    #include "driver/noop/PlatformNoop.h"
     #ifndef USE_EXTERNAL_GLES3
         #include "driver/opengl/PlatformCocoaGL.h"
     #endif
@@ -38,6 +39,7 @@
         #include "driver/vulkan/PlatformVkCocoa.h"
     #endif
 #elif defined(__linux__)
+    #include "driver/noop/PlatformNoop.h"
     #ifndef USE_EXTERNAL_GLES3
         #include "driver/opengl/PlatformGLX.h"
     #endif
@@ -77,6 +79,11 @@ Platform* Platform::create(Backend* backend) noexcept {
     if (*backend == Backend::DEFAULT) {
         *backend = Backend::OPENGL;
     }
+    #if defined(__APPLE__) || defined(__linux__)
+    if (*backend == Backend::NOOP) {
+        return new PlatformNoop();
+    }
+    #endif
     if (*backend == Backend::VULKAN) {
         #if defined(FILAMENT_DRIVER_SUPPORTS_VULKAN)
             #if defined(ANDROID)
